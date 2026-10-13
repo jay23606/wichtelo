@@ -49,11 +49,13 @@ jobs:
         with:
           node-version: 22
 
-      # Repo variable PII_DENYLIST: newline-separated private terms (name,
-      # address, old slugs). Unavailable to fork PRs → generic checks only.
+      # Repo secret PII_DENYLIST: newline-separated private terms (name,
+      # address, old slugs). Must be a secret, not a variable: variables are
+      # printed unmasked in the job log's env block. Unavailable to fork PRs →
+      # generic checks only.
       - name: Check tracked files
         env:
-          PII_DENYLIST: ${{ vars.PII_DENYLIST }}
+          PII_DENYLIST: ${{ secrets.PII_DENYLIST }}
         run: node scripts/check-no-pii.mts
 
   db-lint:
