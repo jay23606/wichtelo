@@ -19,8 +19,8 @@ jobs:
     steps:
       - name: Hit PostgREST root to reset Supabase inactivity timer
         env:
-          SUPABASE_URL: ${{ matrix.env == 'staging' && vars.SUPABASE_URL_STAGING || vars.SUPABASE_URL_PROD }}
-          SUPABASE_KEY: ${{ matrix.env == 'staging' && vars.SUPABASE_PUBLISHABLE_KEY_STAGING || vars.SUPABASE_PUBLISHABLE_KEY_PROD }}
+          SUPABASE_URL: ${{ matrix.env == 'staging' && secrets.SUPABASE_URL_STAGING || secrets.SUPABASE_URL_PROD }}
+          SUPABASE_KEY: ${{ matrix.env == 'staging' && secrets.SUPABASE_PUBLISHABLE_KEY_STAGING || secrets.SUPABASE_PUBLISHABLE_KEY_PROD }}
         run: |
           status=$(curl -s -o /dev/null -w "%{http_code}" \
             -H "apikey: $SUPABASE_KEY" \
