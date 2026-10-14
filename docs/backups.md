@@ -2,7 +2,7 @@
 
 ## Keep-alive
 
-`.github/workflows/supabase-keep-alive.yml` pings PostgREST root daily w/ **publishable** key (repo vars `SUPABASE_PUBLISHABLE_KEY_STAGING`, `SUPABASE_PUBLISHABLE_KEY_PROD`). No service-role key in CI. Old secrets `SUPABASE_SERVICE_ROLE_KEY_{STAGING,PROD}`: delete from repo secrets. Rotate prod service-role key if ever shown in logs.
+`.github/workflows/supabase-keep-alive.yml` pings PostgREST root daily w/ **publishable** key (`sb_publishable_…`, sent as `apikey` header only). Repo **secrets**, never vars (vars print unmasked in job logs): `SUPABASE_URL_{STAGING,PROD}`, `SUPABASE_PUBLISHABLE_KEY_{STAGING,PROD}`. No service-role key in CI: do not create `SUPABASE_SERVICE_ROLE_KEY_*` repo secrets. Rotate prod service-role key if ever shown in logs.
 
 ## Backup strategy (prod)
 
