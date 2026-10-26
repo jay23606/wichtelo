@@ -1,4 +1,4 @@
-﻿/** @vitest-environment jsdom */
+/** @vitest-environment jsdom */
 import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 import { describe, expect, it, vi } from "vitest";
 import messages from "@/messages/de.json";
@@ -26,11 +26,11 @@ describe("CopyInviteLinkClient", () => {
     fireEvent.click(screen.getByRole("button"));
 
     await waitFor(() =>
-      expect(screen.getByRole("alert")).toHaveTextContent(
+      expect(screen.getByRole("alert").textContent ?? "").toContain(
         "Kopieren fehlgeschlagen",
       ),
     );
-    expect(screen.getByRole("alert")).toHaveTextContent(
+    expect(screen.getByRole("alert").textContent ?? "").toContain(
       "https://example.com/invite",
     );
   });
